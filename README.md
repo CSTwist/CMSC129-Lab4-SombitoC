@@ -101,7 +101,24 @@ The server will start running at [http://localhost:3000](http://localhost:3000).
 ## 📊 Test Results
 
 ### 1. Unit Tests (Part 1)
-*(Screenshots will be added during Part 1)*
+All 4 unit tests are passing successfully:
+
+```bash
+> jest
+
+PASS tests/unit/validator.test.js
+  validateContact Unit Tests
+    ✓ should validate a correct contact successfully (3 ms)
+    ✓ should fail when name is empty, too short, too long, or has special characters (1 ms)
+    ✓ should fail when email format is invalid (1 ms)
+    ✓ should fail when phone format is invalid (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.267 s, estimated 1 s
+Ran all test suites.
+```
 
 ### 2. Integration Tests (Part 2)
 *(Screenshots will be added during Part 2)*
