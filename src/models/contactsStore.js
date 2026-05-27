@@ -1,22 +1,35 @@
-/**
- * Contacts Store Stub
- * Currently throws "Not implemented" to satisfy TDD Red Phase.
- */
+let contacts = [];
+let nextId = 1;
+
 class ContactsStore {
   static getAll() {
-    throw new Error("Not implemented");
+    return [...contacts];
   }
 
   static create(contact) {
-    throw new Error("Not implemented");
+    const newContact = {
+      id: nextId++,
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone
+    };
+    contacts.push(newContact);
+    return newContact;
   }
 
   static delete(id) {
-    throw new Error("Not implemented");
+    const idToFind = Number(id);
+    const index = contacts.findIndex(c => c.id === idToFind || String(c.id) === String(id));
+    if (index !== -1) {
+      contacts.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 
   static clear() {
-    throw new Error("Not implemented");
+    contacts = [];
+    nextId = 1;
   }
 }
 
