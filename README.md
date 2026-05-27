@@ -145,7 +145,20 @@ Ran all test suites.
 ```
 
 ### 3. System Tests (Part 3)
-*(Screenshots will be added during Part 3)*
+All 3 Playwright end-to-end browser system tests are passing successfully, mapping directly to our User Stories:
+
+```bash
+> playwright test
+
+Running 3 tests using 1 worker
+
+  ok 1 [chromium] › tests\system\contacts.spec.js:11:3 › Contacts Manager System Tests (E2E) › User Story 1: Should be able to add a new contact and view it in the list (2.0s)
+  ok 2 [chromium] › tests\system\contacts.spec.js:30:3 › Contacts Manager System Tests (E2E) › User Story 2: Should be able to search and filter contacts dynamically (2.3s)
+  ok 3 [chromium] › tests\system\contacts.spec.js:60:3 › Contacts Manager System Tests (E2E) › User Story 3: Should be able to delete a contact after confirming the action (2.7s)
+
+  3 passed (9.2s)
+```
+
 
 ---
 
@@ -167,4 +180,12 @@ We utilize **GitHub Actions** as our automated test runner and verification witn
 ---
 
 ## 🧠 Reflection
-*(Reflection will be added upon completing Part 3)*
+
+Reimplementing this Contacts List application using a strict Test-Driven Development (TDD) approach was a highly educational and eye-opening experience. Writing test cases before writing any implementation code (following the **Red-Green-Refactor** pattern) completely flipped the traditional development model on its head. 
+
+### Key Lessons from the TDD Workflow:
+1. **Design and Scope Clarity:** Writing unit and integration tests first forced me to treat our API and utility functions as black boxes. I had to establish exactly what shape the incoming request and outgoing response payloads must take. This eliminated design ambiguity early on, leading to highly modular utilities (e.g., `validator.js` and `contactsController.js`) with single, clear responsibilities.
+2. **Confidence in Refactoring:** The Refactor cycles in both the REST API phase and the UI phase were incredibly empowering. Because we had robust Jest and Playwright test suites watching our backs, I could confidently reorganize route handling into a clean MVC structure (`contactsController.js`) and extract DOM card rendering helpers (`createContactCardDOM`) without any fear of breaking existing functionality. The immediate test feedback loops acted as safety nets.
+3. **Multi-Scope Testing Strategy:** Dividing the verification process into three isolation boundaries—Unit (isolated helper logic), Integration (REST endpoint routing and store integration), and System (full E2E user journeys)—proved indispensable. Unit tests catch granular formatting edge cases, integration tests secure critical HTTP status flows, and system tests guarantee the client-server interactions actually succeed under realistic browser conditions.
+4. **Engineering for Robustness:** Incorporating direct API resets via the Playwright `request` fixture in `beforeEach` solved state contamination issues, while frontend element-disabling on submission eliminated race conditions. This lab proved that testing is not a chore to do *after* coding, but a fundamental driving methodology that results in bulletproof, self-documenting codebases.
+
