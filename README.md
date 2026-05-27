@@ -121,7 +121,28 @@ Ran all test suites.
 ```
 
 ### 2. Integration Tests (Part 2)
-*(Screenshots will be added during Part 2)*
+All 3 API integration tests are passing successfully, validating our REST route endpoints and controllers:
+
+```bash
+PASS tests/integration/contacts.test.js
+  Contacts API Integration Tests
+    ✓ GET /api/contacts should return all contacts list (34 ms)
+    ✓ POST /api/contacts should create a new contact and return 201 (15 ms)
+    ✓ POST /api/contacts should return 400 Bad Request when validation fails (5 ms)
+
+PASS tests/unit/validator.test.js
+  validateContact Unit Tests
+    ✓ should validate a correct contact successfully (2 ms)
+    ✓ should fail when name is empty, too short, too long, or has special characters
+    ✓ should fail when email format is invalid
+    ✓ should fail when phone format is invalid
+
+Test Suites: 2 passed, 2 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        0.65 s, estimated 1 s
+Ran all test suites.
+```
 
 ### 3. System Tests (Part 3)
 *(Screenshots will be added during Part 3)*
