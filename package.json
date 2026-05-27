@@ -1,0 +1,33 @@
+{
+  "name": "cmsc129-lab4-sombitoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "test:system": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSTwist/CMSC129-Lab4-SombitoC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CSTwist/CMSC129-Lab4-SombitoC/issues"
+  },
+  "homepage": "https://github.com/CSTwist/CMSC129-Lab4-SombitoC#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
+  }
+}
