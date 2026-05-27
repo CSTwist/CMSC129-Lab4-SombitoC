@@ -3,13 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacts Manager</title>
-  <meta name="description" content="Simple, clean, and elegant contacts manager application.">
+  <title>Contacts Manager | Sleek Address Book</title>
+  <meta name="description" content="A premium, simple, and clean single-resource Contacts List CRUD application built with strict TDD.">
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for clean modern icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="app">
-    <h1>Contacts Manager</h1>
-    <p>Initializing...</p>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <i class="fa-solid fa-address-book logo-icon"></i>
+        <h1 class="gradient-title">Contacts Hub</h1>
+      </div>
+      <p class="subtitle">Your clean, fast, and secure digital address book</p>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-grid">
+      <!-- Left Column: Add Contact Form -->
+      <section class="form-section glass-card">
+        <div class="card-header">
+          <i class="fa-solid fa-user-plus card-icon"></i>
+          <h2>Add New Contact</h2>
+        </div>
+        <form id="contact-form" novalidate>
+          <div class="input-group">
+            <label for="name">Full Name</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user field-icon"></i>
+              <input type="text" id="name" placeholder="e.g. Maria Clara" required autocomplete="off">
+            </div>
+            <span class="error-message" id="name-error"></span>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email Address</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-envelope field-icon"></i>
+              <input type="email" id="email" placeholder="e.g. maria.clara@example.com" required autocomplete="off">
+            </div>
+            <span class="error-message" id="email-error"></span>
+          </div>
+
+          <div class="input-group">
+            <label for="phone">Phone Number</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-mobile-screen field-icon"></i>
+              <input type="tel" id="phone" placeholder="e.g. 09189876543" required autocomplete="off">
+            </div>
+            <span class="error-message" id="phone-error"></span>
+          </div>
+
+          <button type="submit" id="save-btn" class="btn btn-primary">
+            <span class="btn-text"><i class="fa-solid fa-floppy-disk"></i> Save Contact</span>
+            <span class="btn-loading-spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i> Saving...</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Column: Contacts List & Search -->
+      <section class="list-section glass-card">
+        <div class="list-controls">
+          <div class="card-header">
+            <i class="fa-solid fa-users card-icon"></i>
+            <h2>My Contacts</h2>
+          </div>
+          <!-- Search Bar -->
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="search" placeholder="Search contacts by name or email..." autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Dynamic Contacts List -->
+        <div id="contacts-list" class="contacts-grid">
+          <!-- Populated dynamically via JS -->
+          <div class="empty-state">
+            <i class="fa-solid fa-circle-nodes empty-icon"></i>
+            <p>No contacts found. Add some above!</p>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
+
+  <!-- Glassmorphic Delete Confirmation Modal -->
+  <div id="delete-confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card zoom-in">
+      <div class="modal-header">
+        <i class="fa-solid fa-triangle-exclamation warning-icon"></i>
+        <h3>Delete Contact</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="delete-contact-name">this contact</strong>?</p>
+        <p class="warning-subtext">This action cannot be undone.</p>
+      </div>
+      <div class="modal-actions">
+        <button id="cancel-delete-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-delete-btn" class="btn btn-danger">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
