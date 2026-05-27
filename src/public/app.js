@@ -85,45 +85,55 @@ function renderContacts(contactsArray) {
   }
 
   contactsArray.forEach(contact => {
-    const card = document.createElement('div');
-    card.className = 'contact-card';
-    card.setAttribute('data-id', contact.id);
-
-    // Get initials for avatar
-    const initials = contact.name
-      .split(' ')
-      .map(part => part[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase();
-
-    card.innerHTML = `
-      <div class="avatar-circle">${initials || 'C'}</div>
-      <div class="contact-info">
-        <div class="contact-name">${escapeHTML(contact.name)}</div>
-        <div class="contact-details">
-          <div class="detail-item contact-email">
-            <i class="fa-regular fa-envelope"></i>${escapeHTML(contact.email)}
-          </div>
-          <div class="detail-item contact-phone">
-            <i class="fa-solid fa-mobile-screen"></i>${escapeHTML(contact.phone)}
-          </div>
-        </div>
-      </div>
-      <div class="contact-actions">
-        <button class="delete-btn" aria-label="Delete contact">
-          <i class="fa-regular fa-trash-can"></i>
-        </button>
-      </div>
-    `;
-
-    // Hook delete button click
-    card.querySelector('.delete-btn').addEventListener('click', () => {
-      showDeleteModal(contact.id, contact.name);
-    });
-
+    const card = createContactCardDOM(contact);
     contactsList.appendChild(card);
   });
+}
+
+/**
+ * Creates and returns the DOM element for a single contact card.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLElement} The constructed contact card DOM node.
+ */
+function createContactCardDOM(contact) {
+  const card = document.createElement('div');
+  card.className = 'contact-card';
+  card.setAttribute('data-id', contact.id);
+
+  // Get initials for avatar
+  const initials = contact.name
+    .split(' ')
+    .map(part => part[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+
+  card.innerHTML = `
+    <div class="avatar-circle">${initials || 'C'}</div>
+    <div class="contact-info">
+      <div class="contact-name">${escapeHTML(contact.name)}</div>
+      <div class="contact-details">
+        <div class="detail-item contact-email">
+          <i class="fa-regular fa-envelope"></i>${escapeHTML(contact.email)}
+        </div>
+        <div class="detail-item contact-phone">
+          <i class="fa-solid fa-mobile-screen"></i>${escapeHTML(contact.phone)}
+        </div>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <button class="delete-btn" aria-label="Delete contact">
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+    </div>
+  `;
+
+  // Hook delete button click
+  card.querySelector('.delete-btn').addEventListener('click', () => {
+    showDeleteModal(contact.id, contact.name);
+  });
+
+  return card;
 }
 
 // Handle Form Submission
