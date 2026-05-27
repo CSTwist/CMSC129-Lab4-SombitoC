@@ -1,45 +1,64 @@
 /**
- * Contact Validation Logic
- * Implements validation for contacts: name, email, and phone.
+ * Contact Validation Utilities
+ * Clean, modularized helper functions for validating name, email, and phone.
+ */
+
+function validateName(name) {
+  if (!name || typeof name !== 'string') {
+    return 'Name is required';
+  }
+  const trimmed = name.trim();
+  if (trimmed.length < 2) {
+    return 'Name must be at least 2 characters long';
+  }
+  if (trimmed.length > 50) {
+    return 'Name must be at most 50 characters long';
+  }
+  if (!/^[a-zA-Z0-9 ]+$/.test(trimmed)) {
+    return 'Name must only contain alphanumeric characters and spaces';
+  }
+  return null;
+}
+
+function validateEmail(email) {
+  if (!email || typeof email !== 'string') {
+    return 'Email is required';
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return 'Invalid email format';
+  }
+  return null;
+}
+
+function validatePhone(phone) {
+  if (!phone || typeof phone !== 'string') {
+    return 'Phone number is required';
+  }
+  // PH Mobile format: starts with 09 or +639 followed by exactly 9 digits
+  const phoneRegex = /^(09|\+639)\d{9}$/;
+  if (!phoneRegex.test(phone)) {
+    return 'Phone number must be a valid Philippine mobile number (e.g., 09XXXXXXXXX or +639XXXXXXXXX)';
+  }
+  return null;
+}
+
+/**
+ * Validates a contact object.
+ * @param {Object} contact - The contact to validate.
+ * @returns {Object} { isValid, errors }
  */
 function validateContact(contact) {
   const errors = {};
+  
+  const nameError = validateName(contact.name);
+  if (nameError) errors.name = nameError;
 
-  // 1. Name Validation
-  if (!contact.name || typeof contact.name !== 'string') {
-    errors.name = 'Name is required';
-  } else {
-    const trimmedName = contact.name.trim();
-    if (trimmedName.length < 2) {
-      errors.name = 'Name must be at least 2 characters long';
-    } else if (trimmedName.length > 50) {
-      errors.name = 'Name must be at most 50 characters long';
-    } else if (!/^[a-zA-Z0-9 ]+$/.test(trimmedName)) {
-      errors.name = 'Name must only contain alphanumeric characters and spaces';
-    }
-  }
+  const emailError = validateEmail(contact.email);
+  if (emailError) errors.email = emailError;
 
-  // 2. Email Validation
-  if (!contact.email || typeof contact.email !== 'string') {
-    errors.email = 'Email is required';
-  } else {
-    // Simple robust email regex that requires domain extension
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(contact.email)) {
-      errors.email = 'Invalid email format';
-    }
-  }
-
-  // 3. Phone Validation
-  if (!contact.phone || typeof contact.phone !== 'string') {
-    errors.phone = 'Phone number is required';
-  } else {
-    // PH Mobile format: starts with 09 or +639 followed by exactly 9 digits
-    const phoneRegex = /^(09|\+639)\d{9}$/;
-    if (!phoneRegex.test(contact.phone)) {
-      errors.phone = 'Phone number must be a valid Philippine mobile number (e.g., 09XXXXXXXXX or +639XXXXXXXXX)';
-    }
-  }
+  const phoneError = validatePhone(contact.phone);
+  if (phoneError) errors.phone = phoneError;
 
   return {
     isValid: Object.keys(errors).length === 0,
@@ -48,5 +67,8 @@ function validateContact(contact) {
 }
 
 module.exports = {
-  validateContact
+  validateContact,
+  validateName,
+  validateEmail,
+  validatePhone
 };
