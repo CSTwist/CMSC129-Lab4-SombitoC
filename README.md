@@ -175,8 +175,8 @@ We utilize **GitHub Actions** as our automated test runner and verification witn
   5. Executes Jest unit and integration tests (`npm test`).
   6. Launches Playwright system tests conditionally if test files are present.
 
-*(Failing/Passing Pipeline Screenshots will be added as we progress)*
-
+![alt text](image.png)
+![alt text](image-1.png)
 ---
 
 ## 🧠 Reflection
