@@ -1,7 +1,6 @@
 # CMSC 129 Laboratory Assignment 4: Contacts Manager
 
-**Author:** Chak (Sombito, C.)  
-**Live URL:** *(Pending Deployment)*  
+**Author:** Chak (Sombito, C.)
 
 ---
 
@@ -185,7 +184,7 @@ Reimplementing this Contacts List application using a strict Test-Driven Develop
 
 ### Key Lessons from the TDD Workflow:
 1. **Design and Scope Clarity:** Writing unit and integration tests first forced me to treat our API and utility functions as black boxes. I had to establish exactly what shape the incoming request and outgoing response payloads must take. This eliminated design ambiguity early on, leading to highly modular utilities (e.g., `validator.js` and `contactsController.js`) with single, clear responsibilities.
-2. **Confidence in Refactoring:** The Refactor cycles in both the REST API phase and the UI phase were incredibly empowering. Because we had robust Jest and Playwright test suites watching our backs, I could confidently reorganize route handling into a clean MVC structure (`contactsController.js`) and extract DOM card rendering helpers (`createContactCardDOM`) without any fear of breaking existing functionality. The immediate test feedback loops acted as safety nets.
+2. **Refactoring:** The Refactor cycles in both the REST API phase and the UI phase were incredibly educational. Because we had robust Jest and Playwright test suites watching our backs, I could confidently reorganize route handling into a clean MVC structure (`contactsController.js`) and extract DOM card rendering helpers (`createContactCardDOM`) without any fear of breaking existing functionality. The immediate test feedback loops acted as safety nets.
 3. **Multi-Scope Testing Strategy:** Dividing the verification process into three isolation boundaries—Unit (isolated helper logic), Integration (REST endpoint routing and store integration), and System (full E2E user journeys)—proved indispensable. Unit tests catch granular formatting edge cases, integration tests secure critical HTTP status flows, and system tests guarantee the client-server interactions actually succeed under realistic browser conditions.
-4. **Engineering for Robustness:** Incorporating direct API resets via the Playwright `request` fixture in `beforeEach` solved state contamination issues, while frontend element-disabling on submission eliminated race conditions. This lab proved that testing is not a chore to do *after* coding, but a fundamental driving methodology that results in bulletproof, self-documenting codebases.
+4. **Engineering for Robustness:** Incorporating direct API resets via the Playwright `request` fixture in `beforeEach` solved state contamination issues, while frontend element-disabling on submission eliminated race conditions. This lab proved that testing is not something to do *after* coding, but a fundamental driving practice that results in bulletproof, self-documenting codebases.
 
